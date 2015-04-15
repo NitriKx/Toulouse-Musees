@@ -4,6 +4,12 @@ class DemandeVisiteMusee {
 
     Date dateDemande
 
+    // Classe d'association
+    static hasOne = [
+            demandeVisite: DemandeVisite,
+            musee: Musee
+    ]
+
     static constraints = {
     }
 }

@@ -8,6 +8,10 @@ class DemandeVisite {
     Integer nbPersonnes
     TypeVisiteEnum status
 
+    static hasMany = [
+            demandeVisiteMusee: DemandeVisiteMusee,
+    ]
+
     static constraints = {
     }
 }

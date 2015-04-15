@@ -4,6 +4,10 @@ class Gestionnaire {
 
     String nom
 
+    static hasMany = [
+            museesGere: Musee
+    ]
+
     static constraints = {
     }
 }
