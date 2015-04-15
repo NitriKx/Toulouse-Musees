@@ -59,6 +59,9 @@ grails {
     }
 }
 
+// permet de prendre en compte la contrainte blank sur les String
+// the default value for this property is true
+grails.databinding.convertEmptyStringsToNull = false
 
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration
@@ -72,10 +75,6 @@ grails.enable.native2ascii = true
 grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
 grails.web.disable.multipart=false
-
-// permet de prendre en compte la contrainte blank sur les String
-grails.databinding.convertEmptyStringsToNull = false
-
 
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']

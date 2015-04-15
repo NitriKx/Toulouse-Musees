@@ -11,28 +11,27 @@ import spock.lang.Unroll
 class AdresseSpec extends Specification {
 
     @Unroll
-    void "teste la validite d'une adresse valide"(String unNumero, String uneRue, String unCodePostal, String uneVille) {
+    void "teste la validite d'une Adresse valide"(String unNumero, String uneRue, String unCodePostal, String uneVille) {
 
-        given: "une adresse initialisee avec ses parametres non nuls et non vides"
+        given: "une Adresse initialisee avec ses parametres non nuls et non vides"
         Adresse adresse = new Adresse(numero: unNumero, rue: uneRue, codePostal: unCodePostal, ville: uneVille)
 
-        expect: "l'adresse est valide"
+        expect: "l'Adresse est valide"
         adresse.validate() == true
 
         where:
         unNumero    |   uneRue              |   unCodePostal    |   uneVille
         "10"        |   "Rue de la Paix"    |   "31120"         |   "Roquettes"
-        null        |   "Rue de la Paix"    |   "31120"         |   "Roquettes"
 
     }
 
     @Unroll
-    void "test l'invalidite d'une adresse non valide"(String unNumero, String uneRue, String unCodePostal, String uneVille) {
+    void "test l'invalidite d'une Adresse non valide"(String unNumero, String uneRue, String unCodePostal, String uneVille) {
 
-        given: "une adresse initialisee avec un de ses parametres vide ou null"
+        given: "une Adresse initialisee avec un de ses parametres vide ou null"
         Adresse adresse = new Adresse(numero: unNumero, rue: uneRue, codePostal: unCodePostal, ville: uneVille)
 
-        expect: "l'adresse est invalide"
+        expect: "l'Adresse est invalide"
         adresse.validate() == false
 
         where:
