@@ -11,5 +11,6 @@ class DemandeVisiteMusee {
     ]
 
     static constraints = {
+        dateDemande nullable: false
     }
 }

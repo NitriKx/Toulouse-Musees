@@ -13,5 +13,10 @@ class DemandeVisite {
     ]
 
     static constraints = {
+        code nullable: false, min: 0
+        dateDebutPeriode nullable: false
+        dateFinPeriode nullable: false
+        nbPersonnes nullable: false, min: 1
+        status nullable: false
     }
 }
