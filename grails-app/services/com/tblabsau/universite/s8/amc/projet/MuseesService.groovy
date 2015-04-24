@@ -10,6 +10,7 @@ class MuseesService {
 
     def loadFromCSVFile(String pathToFile) {
 
+        this.class.getClassLoader().getResourceAsStream("").
         this.class.getClassLoader().getResourceAsStream(pathToFile).toCsvReader([skip: 1, separatorChar: ';']).eachLine({ tokens ->
 
             def nomMusee = tokens[0]

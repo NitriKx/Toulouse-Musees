@@ -35,8 +35,8 @@ class GestionnaireSpec extends Specification {
         gestionnaire.validate() == false
 
         where:
-        unNom | desMusees
-        "" | new HashSet<Musee>()
-        null | new HashSet<Musee>()
+        unNom   | desMusees
+        ""      | new HashSet<Musee>()
+        null    | new HashSet<Musee>()
     }
 }
