@@ -1,7 +1,6 @@
 package com.tblabsau.universite.s8.amc.projet
 
 import grails.test.mixin.TestFor
-import org.codehaus.groovy.transform.stc.GroovyTypeCheckingExtensionSupport
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -15,7 +14,7 @@ class GestionnaireSpec extends Specification {
     void "teste la validite d'un Gestionnaire valide"(String unNom, Set<Musee> desMusees) {
 
         given: "un Gestionnaire initialise avec un nom non vide et non nul"
-        Gestionnaire gestionnaire = new Gestionnaire(nom: unNom, museesGere: desMusees)
+        Gestionnaire gestionnaire = new Gestionnaire(nom: unNom, musees: desMusees)
 
         expect: "le Gestionnaire est valide"
         gestionnaire.validate() == true
@@ -30,7 +29,7 @@ class GestionnaireSpec extends Specification {
     void "test l'invalidite d'un Gestionnaire non valide"(String unNom, Set<Musee> desMusees) {
 
         given: "un Gestionnaire initialise avec un nom vide ou null"
-        Gestionnaire gestionnaire = new Gestionnaire(nom: unNom, museesGere: desMusees)
+        Gestionnaire gestionnaire = new Gestionnaire(nom: unNom, musees: desMusees)
 
         expect: "le Gestionnaire est invalide"
         gestionnaire.validate() == false

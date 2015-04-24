@@ -7,6 +7,11 @@ class Adresse {
     String codePostal
     String ville
 
+    // une Adresse appartient à un Musee
+    static belongsTo = [
+            musee: Musee
+    ]
+
     static constraints = {
         numero nullable: false, blank: false
         rue nullable: false, blank: false

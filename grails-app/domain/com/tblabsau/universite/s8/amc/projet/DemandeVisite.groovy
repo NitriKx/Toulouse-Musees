@@ -9,7 +9,7 @@ class DemandeVisite {
     TypeVisiteEnum status
 
     static hasMany = [
-            demandeVisiteMusee: DemandeVisiteMusee,
+            demandeVisiteMusee: DemandeVisiteMusee
     ]
 
     static constraints = {

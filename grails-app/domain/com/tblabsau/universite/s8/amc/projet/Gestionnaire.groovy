@@ -4,8 +4,9 @@ class Gestionnaire {
 
     String nom
 
+    // un Gestionnaire a plusieurs Musees
     static hasMany = [
-            museesGere: Musee
+            musees: Musee
     ]
 
     static constraints = {

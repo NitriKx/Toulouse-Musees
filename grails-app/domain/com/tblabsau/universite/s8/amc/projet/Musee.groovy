@@ -8,14 +8,13 @@ class Musee {
     String accessMetro
     String accessBus
 
-    // Liaison 1-1
-    static belongsTo = [
+    static hasOne = [
+            gestionnaire: Gestionnaire,
             adresse: Adresse
     ]
 
-    // Liaison 1-*
-    static hasOne = [
-            gestionnaire: Gestionnaire
+    static hasMany = [
+            demandeVisiteMusee: DemandeVisiteMusee
     ]
 
     static constraints = {
