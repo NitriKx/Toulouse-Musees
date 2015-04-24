@@ -12,30 +12,32 @@ import spock.lang.Unroll
 class GestionnaireSpec extends Specification {
 
     @Unroll
-    void "teste la validite d'un Gestionnaire valide"(String unNom) {
+    void "teste la validite d'un Gestionnaire valide"(String unNom, Set<Musee> desMusees) {
 
         given: "un Gestionnaire initialise avec un nom non vide et non nul"
-        Gestionnaire gestionnaire = new Gestionnaire(nom: unNom)
+        Gestionnaire gestionnaire = new Gestionnaire(nom: unNom, museesGere: desMusees)
 
         expect: "le Gestionnaire est valide"
         gestionnaire.validate() == true
 
         where:
-        unNom << ["Terry"]
+        unNom | desMusees
+        "Terry" | new HashSet<Musee>()
 
     }
 
     @Unroll
-    void "test l'invalidite d'un Gestionnaire non valide"(String unNom) {
+    void "test l'invalidite d'un Gestionnaire non valide"(String unNom, Set<Musee> desMusees) {
 
         given: "un Gestionnaire initialise avec un nom vide ou null"
-        Gestionnaire gestionnaire = new Gestionnaire(nom: unNom)
+        Gestionnaire gestionnaire = new Gestionnaire(nom: unNom, museesGere: desMusees)
 
         expect: "le Gestionnaire est invalide"
         gestionnaire.validate() == false
 
         where:
-        unNom << ["", null]
-
+        unNom | desMusees
+        "" | new HashSet<Musee>()
+        null | new HashSet<Musee>()
     }
 }

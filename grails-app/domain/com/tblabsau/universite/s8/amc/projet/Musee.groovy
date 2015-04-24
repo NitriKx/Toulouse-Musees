@@ -22,7 +22,7 @@ class Musee {
         nom nullable: false, blank: false
         horairesOuverture nullable: false, blank: false
         telephone nullable: false, blank: false
-        accessMetro nullable: true, blank: true
-        accessBus nullable: true, blank: true
+        accessMetro nullable: false, blank: false
+        accessBus nullable: false, blank: false
     }
 }
