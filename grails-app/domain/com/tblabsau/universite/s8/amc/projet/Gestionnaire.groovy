@@ -12,4 +12,8 @@ class Gestionnaire {
     static constraints = {
         nom nullable: false, blank: false
     }
+
+    public String toString() {
+        "${nom}"
+    }
 }

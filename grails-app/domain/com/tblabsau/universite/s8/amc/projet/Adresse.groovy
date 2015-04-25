@@ -18,4 +18,8 @@ class Adresse {
         codePostal nullable: false, blank: false
         ville nullable: false, blank: false
     }
+
+    public String toString() {
+        "${numero}, ${rue} ${codePostal} ${ville}"
+    }
 }

@@ -13,4 +13,8 @@ class DemandeVisiteMusee {
     static constraints = {
         dateDemande nullable: false
     }
+
+    public String toString() {
+        "Demande du ${dateDemande}"
+    }
 }

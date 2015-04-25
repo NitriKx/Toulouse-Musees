@@ -24,4 +24,8 @@ class Musee {
         accessMetro nullable: false, blank: true
         accessBus nullable: false, blank: true
     }
+
+    public String toString() {
+        "${nom}"
+    }
 }

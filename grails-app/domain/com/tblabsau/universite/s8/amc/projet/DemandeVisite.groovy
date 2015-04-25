@@ -19,4 +19,8 @@ class DemandeVisite {
         nbPersonnes nullable: false, min: 1
         status nullable: false
     }
+
+    public String toString() {
+        "${code} ${status} ${nbPersonnes} ${dateDebutPeriode} ${dateFinPeriode}"
+    }
 }
