@@ -21,7 +21,10 @@ class MuseesServiceSpec extends Specification {
         when: "le service charge la liste des musées du fichier et les enregistre dans la base de données"
         service.loadFromCSVFile(cheminResourceFichierCSVMusee)
 
-        then: "le service doit avoir 13 musées"
-        service.getMuseeList().size() == 13
+        then: "le service doit avoir 12 musées"
+        service.getMuseeList().size() == 12
+
+        then: "la liste des musée ne doit pas contenir la ligne de titre du fichier CSV"
+        !"EQ_NOM_EQUIPEMENT".equals(service.getMuseeList().get(0).getNom())
     }
 }

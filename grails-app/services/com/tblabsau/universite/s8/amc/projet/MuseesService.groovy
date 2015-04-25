@@ -6,12 +6,10 @@ import grails.transaction.Transactional
 class MuseesService {
 
     GestionnaireService gestionnaireService
-    AdresseService adresseService
 
     def loadFromCSVFile(String pathToFile) {
 
-        this.class.getClassLoader().getResourceAsStream("").
-        this.class.getClassLoader().getResourceAsStream(pathToFile).toCsvReader([skip: 1, separatorChar: ';']).eachLine({ tokens ->
+        this.class.getClassLoader().getResourceAsStream(pathToFile).toCsvReader([skipLines: 1, separatorChar: ';']).eachLine({ tokens ->
 
             def nomMusee = tokens[0]
             def horairesMusee = tokens[2]
@@ -63,8 +61,6 @@ class MuseesService {
         })
 
     }
-
-
     def insertOrUpdateMusee(Musee newMusee) {
         newMusee.save(flush: true)
     }
@@ -73,7 +69,4 @@ class MuseesService {
         return Musee.list()
     }
 
-    def getGestionnaire() {
-
-    }
 }
