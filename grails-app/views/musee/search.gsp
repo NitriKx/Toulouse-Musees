@@ -39,9 +39,7 @@
                 <fieldset class="form-group">
                     <label>Code postal du musée</label>
                     <g:select id="rechercheCodePostal" name="rechercheCodePostal"
-                              from="${Adresse.list()}"
-                              optionKey="codePostal"
-                              optionValue="codePostal"
+                              from="${Adresse.list([sort: "codePostal", order: "asc"]).codePostal.unique()}"
                               required=""
                               value="${precedentRechercheCodePostal?:""}" class="many-to-one"/>
                 </fieldset>
