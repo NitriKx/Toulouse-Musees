@@ -37,7 +37,8 @@ class MuseeControllerSpec extends Specification {
         when: "The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
-        def musee = new Musee()
+        def musee = new Musee(nom: "MuseeTest", horairesOuverture: "8H", telephone: "0987654", accessMetro: "oui", accessBus: "non",
+                gestionnaire: new Gestionnaire(), adresse: new Adresse(), demandeVisiteMusees: new HashSet<DemandeVisiteMusee>())
         musee.validate()
         controller.save(musee)
 

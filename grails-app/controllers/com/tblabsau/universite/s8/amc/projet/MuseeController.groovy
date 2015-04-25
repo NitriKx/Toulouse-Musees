@@ -84,7 +84,7 @@ class MuseeController {
             respond museeInstance.errors, view:'edit'
             return
         }
-
+        
         museesService.insertOrUpdateMusee(museeInstance)
 
         request.withFormat {
