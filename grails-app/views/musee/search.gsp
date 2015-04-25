@@ -110,7 +110,6 @@
                         </g:each>
                         </tbody>
                     </table>
-
                 </div>
              </g:if>
         </g:if>

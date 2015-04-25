@@ -116,6 +116,15 @@ class MuseeController {
                             precedentRechercheNomMusee: rechercheNomMusee, precedentRechercheCodePostal: rechercheCodePostal, precedentRechercheNomRueMusee: rechercheNomRueMusee])
     }
 
+    def ajouterMuseePref(Musee musee) {
+        def maliste = session.museesFav ?: new ArrayList<Musee>()
+        maliste.add(musee)
+        session.museesFav = maliste
+    }
+
+    def listMuseeFav() {
+        List<Musee> maliste = session.museesFav
+    }
 
     //
     //    ERRORS HANDLING

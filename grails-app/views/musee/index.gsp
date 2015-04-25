@@ -44,6 +44,8 @@
 
             <th><g:message code="musee.adresse.label" default="Adresse"/></th>
 
+            <th></th>
+
         </tr>
         </thead>
         <tbody>
@@ -63,8 +65,14 @@
 
                 <td>${fieldValue(bean: museeInstance, field: "adresse")}</td>
 
+                <td><g:actionSubmit value="Ajouter"
+                                    onclick="return confirm('Ajouter à ma liste de Musées préférés ?')"
+                                    action="ajouterMuseePref(museeInstance)"/>
+                </td>
+
             </tr>
         </g:each>
+
         </tbody>
     </table>
 
