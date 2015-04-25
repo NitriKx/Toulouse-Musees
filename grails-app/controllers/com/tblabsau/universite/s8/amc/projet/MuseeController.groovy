@@ -10,7 +10,9 @@ class MuseeController {
 
     MuseesService museesService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    AdresseService adresseService
+
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", faireRecherche: "POST"]
 
 
     //
@@ -34,14 +36,8 @@ class MuseeController {
         respond museeInstance
     }
 
-    def search(String rechercheNomMusee, String rechercheCodePostal, String rechercheNomRueMusee) {
-        if (request.method == 'GET') {
-            respond([])
-
-        } else if (request.method == 'POST') {
-            respond museesService.searchMusees(rechercheNomMusee, rechercheCodePostal, rechercheNomRueMusee),
-                    model: [rechercheNomMusee: rechercheNomMusee, rechercheCodePostal: rechercheCodePostal, rechercheNomRueMusee: rechercheNomRueMusee]
-        }
+    def search() {
+        respond view: "search"
     }
 
 
@@ -113,6 +109,11 @@ class MuseeController {
             }
             '*'{ render status: NO_CONTENT }
         }
+    }
+
+    def faireRecherche(String rechercheNomMusee, String rechercheCodePostal, String rechercheNomRueMusee) {
+            render(view: "search", model: [resultatRecherche: museesService.searchMusees(rechercheNomMusee, rechercheCodePostal, rechercheNomRueMusee),
+                            precedentRechercheNomMusee: rechercheNomMusee, precedentRechercheCodePostal: rechercheCodePostal, precedentRechercheNomRueMusee: rechercheNomRueMusee])
     }
 
 
