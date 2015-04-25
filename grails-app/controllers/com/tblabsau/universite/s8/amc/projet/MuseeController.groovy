@@ -8,7 +8,14 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class MuseeController {
 
+    MuseesService museesService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+
+    //
+    //    PAGES CONTROLLERS
+    //
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -23,6 +30,26 @@ class MuseeController {
         respond new Musee(params)
     }
 
+    def edit(Musee museeInstance) {
+        respond museeInstance
+    }
+
+    def search(String rechercheNomMusee, String rechercheCodePostal, String rechercheNomRueMusee) {
+        if (request.method == 'GET') {
+            respond([])
+
+        } else if (request.method == 'POST') {
+            respond museesService.searchMusees(rechercheNomMusee, rechercheCodePostal, rechercheNomRueMusee),
+                    model: [rechercheNomMusee: rechercheNomMusee, rechercheCodePostal: rechercheCodePostal, rechercheNomRueMusee: rechercheNomRueMusee]
+        }
+    }
+
+
+    //
+    //    CONTROLLER ACTIONS
+    //
+
+
     @Transactional
     def save(Musee museeInstance) {
         if (museeInstance == null) {
@@ -35,7 +62,7 @@ class MuseeController {
             return
         }
 
-        museeInstance.save flush:true
+        museesService.insertOrUpdateMusee(museeInstance)
 
         request.withFormat {
             form multipartForm {
@@ -44,10 +71,6 @@ class MuseeController {
             }
             '*' { respond museeInstance, [status: CREATED] }
         }
-    }
-
-    def edit(Musee museeInstance) {
-        respond museeInstance
     }
 
     @Transactional
@@ -62,7 +85,7 @@ class MuseeController {
             return
         }
 
-        museeInstance.save flush:true
+        museesService.insertOrUpdateMusee(museeInstance)
 
         request.withFormat {
             form multipartForm {
@@ -81,7 +104,7 @@ class MuseeController {
             return
         }
 
-        museeInstance.delete flush:true
+        museesService.deleteMusee(museeInstance)
 
         request.withFormat {
             form multipartForm {
@@ -91,6 +114,11 @@ class MuseeController {
             '*'{ render status: NO_CONTENT }
         }
     }
+
+
+    //
+    //    ERRORS HANDLING
+    //
 
     protected void notFound() {
         request.withFormat {

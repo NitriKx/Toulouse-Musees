@@ -7,6 +7,39 @@ class MuseesService {
 
     GestionnaireService gestionnaireService
 
+
+    def insertOrUpdateMusee(Musee newMusee) {
+        newMusee.save(flush: true)
+    }
+
+    def deleteMusee(Musee musee) {
+        musee.delete(flush: true)
+    }
+
+    def getMuseeList() {
+        return Musee.list()
+    }
+
+    def searchMusees(String rechercheNomMusee, String rechercheCodePostal, String rechercheNomRueMusee) {
+
+        Musee.createCriteria().list {
+            or {
+                adresse {
+                    or {
+                        like("rue", "%${rechercheNomMusee}%")
+                        eq("codePostal", rechercheCodePostal)
+                    }
+                }
+                like("nom", "%${rechercheNomRueMusee}%")
+            }
+        }
+
+    }
+
+
+
+
+
     def loadFromCSVFile(String pathToFile) {
 
         this.class.getClassLoader().getResourceAsStream(pathToFile).toCsvReader([skipLines: 1, separatorChar: ';']).eachLine({ tokens ->
@@ -60,13 +93,6 @@ class MuseesService {
             gestionnaireService.insertOrUpdateGestionnaire(gestionnaire)
         })
 
-    }
-    def insertOrUpdateMusee(Musee newMusee) {
-        newMusee.save(flush: true)
-    }
-
-    def getMuseeList() {
-        return Musee.list()
     }
 
 }
