@@ -24,7 +24,7 @@ class MuseesService {
         def criteria = Musee.createCriteria()
         List<Musee> res = criteria.list {
             if (rechercheNomMusee) {
-                like 'nom', "%${rechercheNomMusee}%"
+                ilike 'nom', "%${rechercheNomMusee}%"
             }
 
             if (rechercheCodePostal) {
@@ -34,7 +34,7 @@ class MuseesService {
             }
             if (rechercheNomRueMusee) {
                 adresse {
-                    like 'rue', "%${rechercheNomMusee}%"
+                    ilike 'rue', "%${rechercheNomMusee}%"
                 }
             }
 

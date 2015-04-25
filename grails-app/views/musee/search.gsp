@@ -111,7 +111,7 @@
                         </tbody>
                     </table>
 
-                </div><
+                </div>
              </g:if>
         </g:if>
     </div>
