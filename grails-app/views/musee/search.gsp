@@ -130,7 +130,7 @@
 
     <table>
         <thead>
-        <p>Mes musées préférés</p>
+        <h1>Mes musées préférés</h1>
         <tr>
             <th>Nom</th>
             <th></th>

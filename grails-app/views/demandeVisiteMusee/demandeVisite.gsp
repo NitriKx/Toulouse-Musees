@@ -13,6 +13,12 @@
 </head>
 
 <body>
+    <div class="nav" role="navigation">
+        <ul>
+            <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+        </ul>
+    </div>
+
     <h2>Vos musées favoris</h2>
     <p>Choissiez un musée à visiter</p>
 
