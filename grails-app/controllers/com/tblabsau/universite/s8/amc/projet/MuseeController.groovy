@@ -12,7 +12,7 @@ class MuseeController {
 
     AdresseService adresseService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", faireRecherche: "POST"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 
     //
@@ -111,9 +111,19 @@ class MuseeController {
         }
     }
 
-    def faireRecherche(String rechercheNomMusee, String rechercheCodePostal, String rechercheNomRueMusee) {
-            render(view: "search", model: [resultatRecherche: museesService.searchMusees(rechercheNomMusee, rechercheCodePostal, rechercheNomRueMusee),
-                            precedentRechercheNomMusee: rechercheNomMusee, precedentRechercheCodePostal: rechercheCodePostal, precedentRechercheNomRueMusee: rechercheNomRueMusee])
+    def faireRecherche(String rechercheNomMusee, String rechercheCodePostal, String rechercheNomRueMusee, Integer max, Integer offset) {
+
+        params.max = max ?: 5
+        params.offset = offset ?: 0
+
+        def resultatRecherche = museesService.searchMusees(rechercheNomMusee, rechercheCodePostal, rechercheNomRueMusee)
+        def totalResultCount = resultatRecherche.size()
+
+        def dernierElement = params.max + params.offset <= resultatRecherche.size() ? params.max + params.offset  : resultatRecherche.size()
+        resultatRecherche = resultatRecherche.subList(params.offset, dernierElement)
+
+        render(view: "search", model: [resultatRecherche: resultatRecherche, resultatRechercheCount: totalResultCount,
+                                       rechercheNomMusee: rechercheNomMusee, rechercheCodePostal: rechercheCodePostal, rechercheNomRueMusee: rechercheNomRueMusee])
     }
 
     def ajouterMuseePref() {
