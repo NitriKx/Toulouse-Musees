@@ -20,18 +20,24 @@ class DemandeVisteMuseeService {
         Musee musee = Musee.findById(idMusee)
 
         DemandeVisite demandeVisite = new DemandeVisite(dateDebutPeriode: dateDebut, dateFinPeriode: dateFin, nbPersonnes: nbPersonnes, status: typeVisiteEnum)
+        if (demandeVisite.validate() == false) {
+            String errorMessage = "Demande invalide: \n"
+            demandeVisite.errors.fieldErrors.each {
+                errorMessage += "  - Le champs ${it.field} est invalide. \n"
+            }
+            throw new RuntimeException(errorMessage)
+        }
         demandeVisiteService.insertOrUpdate(demandeVisite)
 
-        if (demandeVisite.hasErrors()) {
-            throw new RuntimeException("Impossible de sauvegarder la demande de visite : " + demandeVisite.getErrors())
-        }
-
         DemandeVisiteMusee nouvelleDemandeVisiteMusee = new DemandeVisiteMusee(dateDemande: new Date(), demandeVisite: demandeVisite, musee: musee)
-        insertOrUpdate(nouvelleDemandeVisiteMusee)
-
-        if (nouvelleDemandeVisiteMusee.hasErrors()) {
-            throw new RuntimeException("Impossible de sauvegarder la demande de visite musee : " + nouvelleDemandeVisiteMusee.getErrors())
+        if (nouvelleDemandeVisiteMusee.validate()) {
+            String errorMessage = "Demande invalide: \n"
+            demandeVisite.errors.fieldErrors.each {
+                errorMessage += "  - Le champs ${it.field} est invalide.\n"
+            }
+            throw new RuntimeException(errorMessage)
         }
+        insertOrUpdate(nouvelleDemandeVisiteMusee)
 
         return nouvelleDemandeVisiteMusee
     }

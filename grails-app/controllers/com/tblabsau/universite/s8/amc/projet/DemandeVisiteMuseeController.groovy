@@ -40,9 +40,16 @@ class DemandeVisiteMuseeController {
         Date dateDebut = new Date(year: params.demandeDateDebut_year.toInteger(), month: params.demandeDateDebut_month.toInteger(), hours: params.demandeDateDebut_hour.toInteger())
         Date dateFin = new Date(year: params.demandeDateFin_year.toInteger(), month: params.demandeDateFin_month.toInteger(), hours: params.demandeDateFin_hour.toInteger())
 
-        def nouvelleVisiteEnregistree = demandeVisteMuseeService.enregistrerDemandeVisite(demandeMuseeId, dateDebut, dateFin, demandeNbPersonnes, TypeVisiteEnum.EN_COURS_DE_TRAITEMENT)
+        try {
+            def nouvelleVisiteEnregistree = demandeVisteMuseeService.enregistrerDemandeVisite(demandeMuseeId, dateDebut, dateFin, demandeNbPersonnes, TypeVisiteEnum.EN_COURS_DE_TRAITEMENT)
+            render view: 'demandeVisite', model: [ nouvelleVisiteEnregistree: nouvelleVisiteEnregistree ]
 
-        render view: 'demandeVisite', model: [ nouvelleVisiteEnregistree: nouvelleVisiteEnregistree ]
+        } catch (Exception e) {
+            log.error("Impossible d'enregistrer la visite", e)
+            flash.message = e.getMessage()
+            render view: 'demandeVisite'
+        }
+
     }
 
     @Transactional

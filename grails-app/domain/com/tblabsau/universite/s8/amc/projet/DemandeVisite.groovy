@@ -13,7 +13,7 @@ class DemandeVisite {
 
     static constraints = {
         dateDebutPeriode nullable: false
-        dateFinPeriode nullable: false, validator: { it.after(dateDebutPeriode) }
+        dateFinPeriode nullable: false, validator: { value, demandeVisite -> value.after(demandeVisite.dateDebutPeriode) }
         nbPersonnes nullable: false, min: 1
         status nullable: false
     }
