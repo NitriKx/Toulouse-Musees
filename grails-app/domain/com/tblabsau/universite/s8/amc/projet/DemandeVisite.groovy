@@ -2,7 +2,6 @@ package com.tblabsau.universite.s8.amc.projet
 
 class DemandeVisite {
 
-    Integer code
     Date dateDebutPeriode
     Date dateFinPeriode
     Integer nbPersonnes
@@ -13,14 +12,13 @@ class DemandeVisite {
     ]
 
     static constraints = {
-        code nullable: false, min: 0
         dateDebutPeriode nullable: false
-        dateFinPeriode nullable: false
+        dateFinPeriode nullable: false, validator: { it.after(dateDebutPeriode) }
         nbPersonnes nullable: false, min: 1
         status nullable: false
     }
 
     public String toString() {
-        "${code} ${status} ${nbPersonnes} ${dateDebutPeriode} ${dateFinPeriode}"
+        "${status} ${nbPersonnes} ${dateDebutPeriode} ${dateFinPeriode}"
     }
 }
