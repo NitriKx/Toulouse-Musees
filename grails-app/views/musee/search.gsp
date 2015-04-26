@@ -33,7 +33,7 @@
 
                 <fieldset class="form-group">
                     <label>Le nom du musée contient </label>
-                    <g:textField name="rechercheNomMusee" value="${precedentRechercheNomMusee?:""}"/>
+                    <g:textField name="rechercheNomMusee" value="${rechercheNomMusee?:""}"/>
                 </fieldset>
 
                 <fieldset class="form-group">
@@ -41,12 +41,12 @@
                     <g:select id="rechercheCodePostal" name="rechercheCodePostal"
                               from="${Adresse.list([sort: "codePostal", order: "asc"]).codePostal.unique()}"
                               required=""
-                              value="${precedentRechercheCodePostal?:""}" class="many-to-one"/>
+                              value="${rechercheCodePostal?:""}" class="many-to-one"/>
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label>Le nom de la rue du musée contient </label>
-                    <g:textField name="rechercheNomRueMusee" value="${precedentRechercheNomRueMusee?:""}"/>
+                    <g:textField name="rechercheNomRueMusee" value="${rechercheNomRueMusee?:""}"/>
                 </fieldset>
 
                 <fieldset class="buttons">
@@ -58,10 +58,6 @@
         </div>
 
         <g:if test="${resultatRecherche}">
-
-            <g:if test="${resultatRecherche.size() <= 0}">
-                Pas de résultats
-            </g:if>
 
             <g:if test="${resultatRecherche.size() > 0}">
 
@@ -110,6 +106,10 @@
                         </g:each>
                         </tbody>
                     </table>
+
+                    <div class="paginate">
+                        <g:paginate total="${resultatRechercheCount}" controller="musee" action="faireRecherche" params="${params}" />
+                    </div>
                 </div>
              </g:if>
         </g:if>
