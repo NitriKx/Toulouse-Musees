@@ -10,6 +10,8 @@ class MuseeController {
 
     MuseesService museesService
 
+    AdresseService adresseService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 
@@ -34,14 +36,8 @@ class MuseeController {
         respond museeInstance
     }
 
-    def search(String rechercheNomMusee, String rechercheCodePostal, String rechercheNomRueMusee) {
-        if (request.method == 'GET') {
-            respond([])
-
-        } else if (request.method == 'POST') {
-            respond museesService.searchMusees(rechercheNomMusee, rechercheCodePostal, rechercheNomRueMusee),
-                    model: [rechercheNomMusee: rechercheNomMusee, rechercheCodePostal: rechercheCodePostal, rechercheNomRueMusee: rechercheNomRueMusee]
-        }
+    def search() {
+        respond view: "search"
     }
 
 
@@ -115,6 +111,29 @@ class MuseeController {
         }
     }
 
+    def faireRecherche(String rechercheNomMusee, String rechercheCodePostal, String rechercheNomRueMusee, Integer max, Integer offset) {
+
+        params.max = max ?: 5
+        params.offset = offset ?: 0
+
+        def resultatRecherche = museesService.searchMusees(rechercheNomMusee, rechercheCodePostal, rechercheNomRueMusee)
+        def totalResultCount = resultatRecherche.size()
+
+        def dernierElement = params.max + params.offset <= resultatRecherche.size() ? params.max + params.offset  : resultatRecherche.size()
+        resultatRecherche = resultatRecherche.subList(params.offset, dernierElement)
+
+        render(view: "search", model: [resultatRecherche: resultatRecherche, resultatRechercheCount: totalResultCount,
+                                       rechercheNomMusee: rechercheNomMusee, rechercheCodePostal: rechercheCodePostal, rechercheNomRueMusee: rechercheNomRueMusee])
+    }
+
+    def ajouterMuseePref() {
+        def maliste = session.museesFav ?: new ArrayList<Musee>()
+        maliste.add(Musee.findById(params.museeFavID))
+        session.museesFav = maliste
+        for(Musee m : maliste)
+            System.out.println("Name : ${m.nom}")
+        faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, params.max, params.offset)
+    }
 
     //
     //    ERRORS HANDLING

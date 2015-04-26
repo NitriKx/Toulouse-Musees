@@ -7,7 +7,6 @@ class MuseesService {
 
     GestionnaireService gestionnaireService
 
-
     def insertOrUpdateMusee(Musee newMusee) {
         newMusee.save(flush: true)
     }
@@ -22,22 +21,27 @@ class MuseesService {
 
     def searchMusees(String rechercheNomMusee, String rechercheCodePostal, String rechercheNomRueMusee) {
 
-        Musee.createCriteria().list {
-            or {
-                adresse {
-                    or {
-                        like("rue", "%${rechercheNomMusee}%")
-                        eq("codePostal", rechercheCodePostal)
-                    }
-                }
-                like("nom", "%${rechercheNomRueMusee}%")
+        def criteria = Musee.createCriteria()
+        List<Musee> res = criteria.list {
+            if (rechercheNomMusee) {
+                ilike 'nom', "%${rechercheNomMusee}%"
             }
+
+            if (rechercheCodePostal) {
+                adresse {
+                    eq('codePostal',rechercheCodePostal)
+                }
+            }
+            if (rechercheNomRueMusee) {
+                adresse {
+                    ilike 'rue', "%${rechercheNomMusee}%"
+                }
+            }
+
+            order('nom')
         }
-
+        res
     }
-
-
-
 
 
     def loadFromCSVFile(String pathToFile) {
