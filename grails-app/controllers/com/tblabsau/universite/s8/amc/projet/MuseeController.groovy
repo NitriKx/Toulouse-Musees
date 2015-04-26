@@ -132,7 +132,7 @@ class MuseeController {
         session.museesFav = maliste
         for(Musee m : maliste)
             System.out.println("Name : ${m.nom}")
-        faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee)
+        faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, params.max, params.offset)
     }
 
     //
