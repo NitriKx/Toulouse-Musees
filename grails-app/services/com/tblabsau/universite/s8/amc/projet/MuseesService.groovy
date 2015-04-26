@@ -34,7 +34,7 @@ class MuseesService {
             }
             if (rechercheNomRueMusee) {
                 adresse {
-                    ilike 'rue', "%${rechercheNomMusee}%"
+                    ilike 'rue', "%${rechercheNomRueMusee}%"
                 }
             }
 
