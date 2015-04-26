@@ -103,8 +103,10 @@
                                 <td>
                                     <g:form url="[controller:'musee', action: 'ajouterMuseePref']" method="POST">
                                         <input type="hidden" name="rechercheNomMusee" value="${rechercheNomMusee?:""}"/>
-                                        <input type="hidden" name="rechercheCodePostal" value="${rechercheNomMusee?:""}"/>
-                                        <input type="hidden" name="rechercheNomRueMusee" value="${rechercheNomMusee?:""}"/>
+                                        <input type="hidden" name="rechercheCodePostal" value="${rechercheCodePostal?:""}"/>
+                                        <input type="hidden" name="rechercheNomRueMusee" value="${rechercheNomRueMusee?:""}"/>
+                                        <input type="hidden" name="max" value="${params.max?:""}"/>
+                                        <input type="hidden" name="offset" value="${params.offset?:""}"/>
                                         <input type="hidden" name="museeFavID" value="${museeInstance.id}"/>
                                         <g:if test="${!(session.museesFav?.containsKey(museeInstance.id)) }">
                                             <g:submitButton name="ajouterPref" value="Ajouter"/>
@@ -140,8 +142,10 @@
             <td>
                 <g:form url="[controller:'musee', action: 'deleteMuseePref']" method="POST">
                     <input type="hidden" name="rechercheNomMusee" value="${rechercheNomMusee?:""}"/>
-                    <input type="hidden" name="rechercheCodePostal" value="${rechercheNomMusee?:""}"/>
-                    <input type="hidden" name="rechercheNomRueMusee" value="${rechercheNomMusee?:""}"/>
+                    <input type="hidden" name="rechercheCodePostal" value="${rechercheCodePostal?:""}"/>
+                    <input type="hidden" name="rechercheNomRueMusee" value="${rechercheNomRueMusee?:""}"/>
+                    <input type="hidden" name="max" value="${params.max?:""}"/>
+                    <input type="hidden" name="offset" value="${params.offset?:""}"/>
                     <input type="hidden" name="museeFavID" value="${museeFavInstance.id}"/>
                     <g:submitButton name="deletePref" value="Supprimer"/>
                 </g:form>

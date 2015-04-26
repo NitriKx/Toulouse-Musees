@@ -128,27 +128,34 @@ class MuseeController {
 
     def ajouterMuseePref() {
 
+        def max = (params.max) ? Integer.parseInt(params.max) : null
+        def offset = (params.offset) ? Integer.parseInt(params.offset) : null
+
         def mapMusee = session.museesFav ?: new HashMap<Long, Musee>()
         if ( !mapMusee.containsKey(params.museeFavID.toLong()) ) {
             mapMusee.put(params.museeFavID.toLong(), Musee.findById(params.museeFavID))
         }
         session.museesFav = mapMusee
-        System.out.println("Liste :")
+        System.out.println("Liste des musées préférées :")
         for(Musee m : mapMusee.values())
-            System.out.println("-Name : ${m.nom}")
-        faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, params.max, params.offset)
+            System.out.println("- Name : ${m.nom}")
+        faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, max, offset)
     }
 
     def deleteMuseePref() {
+
+        def max = (params.max) ? Integer.parseInt(params.max) : null
+        def offset = (params.offset) ? Integer.parseInt(params.offset) : null
+
         def mapMusee = session.museesFav ?: new HashMap<Long, Musee>()
         if ( mapMusee.containsKey(params.museeFavID.toLong()) ) {
             mapMusee.remove(params.museeFavID.toLong())
         }
         session.museesFav = mapMusee
-        System.out.println("Liste :")
+        System.out.println("Liste des musées préférées :")
         for(Musee m : mapMusee.values())
-            System.out.println("-Name : ${m.nom}")
-        faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, params.max, params.offset)
+            System.out.println("- Name : ${m.nom}")
+        faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, max, offset)
     }
 
     //
