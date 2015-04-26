@@ -127,11 +127,15 @@ class MuseeController {
     }
 
     def ajouterMuseePref() {
-        def maliste = session.museesFav ?: new ArrayList<Musee>()
-        maliste.add(Musee.findById(params.museeFavID))
-        session.museesFav = maliste
-        for(Musee m : maliste)
-            System.out.println("Name : ${m.nom}")
+
+        def mapMusee = session.museesFav ?: new HashMap<Long, Musee>()
+        if ( !mapMusee.containsKey(params.museeFavID.toLong()) ) {
+            mapMusee.put(params.museeFavID.toLong(), Musee.findById(params.museeFavID))
+        }
+        session.museesFav = mapMusee
+        System.out.println("Liste :")
+        for(Musee m : mapMusee.values())
+            System.out.println("-Name : ${m.nom}")
         faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, params.max, params.offset)
     }
 

@@ -102,11 +102,13 @@
 
                                 <td>
                                     <g:form url="[controller:'musee', action: 'ajouterMuseePref']" method="POST">
-                                        <input type="hidden" name="rechercheNomMusee" value="${precedentRechercheNomMusee?:""}"/>
-                                        <input type="hidden" name="rechercheCodePostal" value="${precedentRechercheCodePostal?:""}"/>
-                                        <input type="hidden" name="rechercheNomRueMusee" value="${precedentRechercheNomRueMusee?:""}"/>
+                                        <input type="hidden" name="rechercheNomMusee" value="${rechercheNomMusee?:""}"/>
+                                        <input type="hidden" name="rechercheCodePostal" value="${rechercheNomMusee?:""}"/>
+                                        <input type="hidden" name="rechercheNomRueMusee" value="${rechercheNomMusee?:""}"/>
                                         <input type="hidden" name="museeFavID" value="${museeInstance.id}"/>
-                                        <g:submitButton name="ajouterPref" value="Ajouter"/>
+                                        <g:if test="${!(session.museesFav?.containsKey(museeInstance.id)) }">
+                                            <g:submitButton name="ajouterPref" value="Ajouter"/>
+                                        </g:if>
                                     </g:form>
                                 </td>
 
@@ -123,7 +125,23 @@
         </g:if>
     </div>
 
-
+    <table>
+        <thead>
+        <p>Mes musées préférés</p>
+        <tr>
+            <th>Nom</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <g:each in="${session.museesFav?.values()}" status="i" var="museeFavInstance">
+        <tr>
+            <td>${museeFavInstance.nom}</td>
+            <td></td>
+        </tr>
+        </g:each>
+        </tbody>
+    </table>
 
 
 </body>
