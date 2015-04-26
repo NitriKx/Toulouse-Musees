@@ -111,16 +111,16 @@ class MuseeController {
         }
     }
 
-    def faireRecherche(String rechercheNomMusee, String rechercheCodePostal, String rechercheNomRueMusee, Integer max) {
+    def faireRecherche(String rechercheNomMusee, String rechercheCodePostal, String rechercheNomRueMusee, Integer max, Integer offset) {
 
         params.max = max ?: 5
-        params.offset = params.offset ?: 0
+        params.offset = offset ?: 0
 
         def resultatRecherche = museesService.searchMusees(rechercheNomMusee, rechercheCodePostal, rechercheNomRueMusee)
         def totalResultCount = resultatRecherche.size()
 
-        def dernierElement = params.max + Integer.parseInt(params.offset) <= resultatRecherche.size() ? params.max + Integer.parseInt(params.offset)  : resultatRecherche.size()
-        resultatRecherche = resultatRecherche.subList(Integer.parseInt(params.offset), dernierElement)
+        def dernierElement = params.max + params.offset <= resultatRecherche.size() ? params.max + params.offset  : resultatRecherche.size()
+        resultatRecherche = resultatRecherche.subList(params.offset, dernierElement)
 
         render(view: "search", model: [resultatRecherche: resultatRecherche, resultatRechercheCount: totalResultCount,
                                        rechercheNomMusee: rechercheNomMusee, rechercheCodePostal: rechercheCodePostal, rechercheNomRueMusee: rechercheNomRueMusee])

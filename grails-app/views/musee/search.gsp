@@ -29,7 +29,7 @@
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
 
-            <g:form url="[controller:'musee', action: 'faireRecherche']" method="POST">
+            <g:form url="[controller:'musee', action: 'faireRecherche']" method="GET">
 
                 <fieldset class="form-group">
                     <label>Le nom du musée contient </label>
@@ -67,19 +67,15 @@
                         <thead>
                         <tr>
 
-                            <g:sortableColumn property="nom" title="${message(code: 'musee.nom.label', default: 'Nom')}"/>
+                            <th>${message(code: 'musee.nom.label', default: 'Nom')}</th>
 
-                            <g:sortableColumn property="horairesOuverture"
-                                              title="${message(code: 'musee.horairesOuverture.label', default: 'Horaires Ouverture')}"/>
+                            <th>${message(code: 'musee.horairesOuverture.label', default: 'Horaires Ouverture')}</th>
 
-                            <g:sortableColumn property="telephone"
-                                              title="${message(code: 'musee.telephone.label', default: 'Telephone')}"/>
+                            <th>${message(code: 'musee.telephone.label', default: 'Telephone')}</th>
 
-                            <g:sortableColumn property="accessMetro"
-                                              title="${message(code: 'musee.accessMetro.label', default: 'Access Metro')}"/>
+                            <th>${message(code: 'musee.accessMetro.label', default: 'Access Metro')}</th>
 
-                            <g:sortableColumn property="accessBus"
-                                              title="${message(code: 'musee.accessBus.label', default: 'Access Bus')}"/>
+                            <th>${message(code: 'musee.accessBus.label', default: 'Access Bus')}</th>
 
                             <th><g:message code="musee.adresse.label" default="Adresse"/></th>
 
