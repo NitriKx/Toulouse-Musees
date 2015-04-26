@@ -30,7 +30,7 @@ class DemandeVisteMuseeService {
         demandeVisiteService.insertOrUpdate(demandeVisite)
 
         DemandeVisiteMusee nouvelleDemandeVisiteMusee = new DemandeVisiteMusee(dateDemande: new Date(), demandeVisite: demandeVisite, musee: musee)
-        if (nouvelleDemandeVisiteMusee.validate()) {
+        if (nouvelleDemandeVisiteMusee.validate() == false) {
             String errorMessage = "Demande invalide: \n"
             demandeVisite.errors.fieldErrors.each {
                 errorMessage += "  - Le champs ${it.field} est invalide.\n"

@@ -37,8 +37,8 @@ class DemandeVisiteMuseeController {
 
     def enregistrerVisite(Integer demandeMuseeId, String demandeDateDebut, String demandeDateFin, Integer demandeNbPersonnes) {
 
-        Date dateDebut = new Date(year: params.demandeDateDebut_year.toInteger(), month: params.demandeDateDebut_month.toInteger(), hours: params.demandeDateDebut_hour.toInteger())
-        Date dateFin = new Date(year: params.demandeDateFin_year.toInteger(), month: params.demandeDateFin_month.toInteger(), hours: params.demandeDateFin_hour.toInteger())
+        Date dateDebut = new Date(year: params.demandeDateDebut_year.toInteger(), month: params.demandeDateDebut_month.toInteger(), date: params.demandeDateDebut_day.toInteger(), hours: params.demandeDateDebut_hour.toInteger())
+        Date dateFin = new Date(year: params.demandeDateFin_year.toInteger(), month: params.demandeDateFin_month.toInteger(), date: params.demandeDateFin_day.toInteger(), hours: params.demandeDateFin_hour.toInteger())
 
         try {
             def nouvelleVisiteEnregistree = demandeVisteMuseeService.enregistrerDemandeVisite(demandeMuseeId, dateDebut, dateFin, demandeNbPersonnes, TypeVisiteEnum.EN_COURS_DE_TRAITEMENT)

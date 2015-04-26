@@ -15,9 +15,6 @@
   		<asset:stylesheet src="application.css"/>
 		<asset:javascript src="application.js"/>
 
-        <asset:stylesheet src="bootstrap.min.css"/>
-        <asset:javascript src="bootstrap.min.js"/>
-
 		<g:layoutHead/>
 	</head>
 	<body>
