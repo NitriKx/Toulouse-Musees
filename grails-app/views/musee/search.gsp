@@ -105,6 +105,7 @@
                                         <input type="hidden" name="rechercheNomMusee" value="${rechercheNomMusee?:""}"/>
                                         <input type="hidden" name="rechercheCodePostal" value="${rechercheCodePostal?:""}"/>
                                         <input type="hidden" name="rechercheNomRueMusee" value="${rechercheNomRueMusee?:""}"/>
+                                        <input type="hidden" name="rechercheEffectuee" value="${resultatRecherche ? 'true' : 'false' }"/>
                                         <input type="hidden" name="max" value="${params.max?:""}"/>
                                         <input type="hidden" name="offset" value="${params.offset?:""}"/>
                                         <input type="hidden" name="museeFavID" value="${museeInstance.id}"/>
@@ -144,6 +145,7 @@
                     <input type="hidden" name="rechercheNomMusee" value="${rechercheNomMusee?:""}"/>
                     <input type="hidden" name="rechercheCodePostal" value="${rechercheCodePostal?:""}"/>
                     <input type="hidden" name="rechercheNomRueMusee" value="${rechercheNomRueMusee?:""}"/>
+                    <input type="hidden" name="rechercheEffectuee" value="${resultatRecherche ? 'true' : 'false' }"/>
                     <input type="hidden" name="max" value="${params.max?:""}"/>
                     <input type="hidden" name="offset" value="${params.offset?:""}"/>
                     <input type="hidden" name="museeFavID" value="${museeFavInstance.id}"/>

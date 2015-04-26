@@ -139,7 +139,13 @@ class MuseeController {
         System.out.println("Liste des musées préférées :")
         for(Musee m : mapMusee.values())
             System.out.println("- Name : ${m.nom}")
-        faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, max, offset)
+
+        if ("true".equals(params.rechercheEffectuee?:"")) {
+            faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, max, offset)
+
+        } else {
+            render(view: "search", model: [rechercheNomMusee: params.rechercheNomMusee, rechercheCodePostal: params.rechercheCodePostal, rechercheNomRueMusee: params.rechercheNomRueMusee, max: max, offset: offset])
+        }
     }
 
     def deleteMuseePref() {
@@ -155,7 +161,13 @@ class MuseeController {
         System.out.println("Liste des musées préférées :")
         for(Musee m : mapMusee.values())
             System.out.println("- Name : ${m.nom}")
-        faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, max, offset)
+
+        if ("true".equals(params.rechercheEffectuee?:"")) {
+            faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, max, offset)
+
+        } else {
+            render(view: "search", model: [rechercheNomMusee: params.rechercheNomMusee, rechercheCodePostal: params.rechercheCodePostal, rechercheNomRueMusee: params.rechercheNomRueMusee, max: max, offset: offset])
+        }
     }
 
     //
