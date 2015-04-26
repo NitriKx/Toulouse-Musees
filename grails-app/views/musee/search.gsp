@@ -137,7 +137,15 @@
         <g:each in="${session.museesFav?.values()}" status="i" var="museeFavInstance">
         <tr>
             <td>${museeFavInstance.nom}</td>
-            <td></td>
+            <td>
+                <g:form url="[controller:'musee', action: 'deleteMuseePref']" method="POST">
+                    <input type="hidden" name="rechercheNomMusee" value="${rechercheNomMusee?:""}"/>
+                    <input type="hidden" name="rechercheCodePostal" value="${rechercheNomMusee?:""}"/>
+                    <input type="hidden" name="rechercheNomRueMusee" value="${rechercheNomMusee?:""}"/>
+                    <input type="hidden" name="museeFavID" value="${museeFavInstance.id}"/>
+                    <g:submitButton name="deletePref" value="Supprimer"/>
+                </g:form>
+            </td>
         </tr>
         </g:each>
         </tbody>

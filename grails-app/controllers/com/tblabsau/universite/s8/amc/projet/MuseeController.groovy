@@ -139,6 +139,18 @@ class MuseeController {
         faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, params.max, params.offset)
     }
 
+    def deleteMuseePref() {
+        def mapMusee = session.museesFav ?: new HashMap<Long, Musee>()
+        if ( mapMusee.containsKey(params.museeFavID.toLong()) ) {
+            mapMusee.remove(params.museeFavID.toLong())
+        }
+        session.museesFav = mapMusee
+        System.out.println("Liste :")
+        for(Musee m : mapMusee.values())
+            System.out.println("-Name : ${m.nom}")
+        faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee, params.max, params.offset)
+    }
+
     //
     //    ERRORS HANDLING
     //
