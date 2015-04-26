@@ -116,14 +116,13 @@ class MuseeController {
                             precedentRechercheNomMusee: rechercheNomMusee, precedentRechercheCodePostal: rechercheCodePostal, precedentRechercheNomRueMusee: rechercheNomRueMusee])
     }
 
-    def ajouterMuseePref(Musee musee) {
+    def ajouterMuseePref() {
         def maliste = session.museesFav ?: new ArrayList<Musee>()
-        maliste.add(musee)
+        maliste.add(Musee.findById(params.museeFavID))
         session.museesFav = maliste
-    }
-
-    def listMuseeFav() {
-        List<Musee> maliste = session.museesFav
+        for(Musee m : maliste)
+            System.out.println("Name : ${m.nom}")
+        faireRecherche(params.rechercheNomMusee, params.rechercheCodePostal, params.rechercheNomRueMusee)
     }
 
     //

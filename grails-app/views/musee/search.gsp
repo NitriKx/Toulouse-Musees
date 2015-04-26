@@ -87,6 +87,8 @@
 
                             <th><g:message code="musee.adresse.label" default="Adresse"/></th>
 
+                            <th></th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -105,6 +107,16 @@
                                 <td>${fieldValue(bean: museeInstance, field: "accessBus")}</td>
 
                                 <td>${fieldValue(bean: museeInstance, field: "adresse")}</td>
+
+                                <td>
+                                    <g:form url="[controller:'musee', action: 'ajouterMuseePref']" method="POST">
+                                        <input type="hidden" name="rechercheNomMusee" value="${precedentRechercheNomMusee?:""}"/>
+                                        <input type="hidden" name="rechercheCodePostal" value="${precedentRechercheCodePostal?:""}"/>
+                                        <input type="hidden" name="rechercheNomRueMusee" value="${precedentRechercheNomRueMusee?:""}"/>
+                                        <input type="hidden" name="museeFavID" value="${museeInstance.id}"/>
+                                        <g:submitButton name="ajouterPref" value="Ajouter"/>
+                                    </g:form>
+                                </td>
 
                             </tr>
                         </g:each>
