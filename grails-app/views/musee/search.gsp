@@ -151,6 +151,7 @@
         </tbody>
     </table>
 
+    <g:link url="[controller:'demandeVisiteMusee', action: 'demandeVisite']"><button>Effectuer une demande de visite</button></g:link>
 
 </body>
 </html>

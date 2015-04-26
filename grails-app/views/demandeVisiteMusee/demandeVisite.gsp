@@ -17,7 +17,7 @@
     <p>Choissiez un musée à visiter</p>
 
     <g:if test="${nouvelleVisiteEnregistree}">
-        <h4>Visite du musée ${nouvelleVisiteEnregistree.musee.nom} enregistrée. Votre code est <b>${nouvelleVisiteEnregistree.id}.</b></h4>
+        <p>Votre demande de visite du musée ${nouvelleVisiteEnregistree.musee.nom} a été  enregistrée et sera traitée prochainement. Votre code est <b>${nouvelleVisiteEnregistree.id}.</b></p>
     </g:if>
 
     <g:if test="${flash.message}">
